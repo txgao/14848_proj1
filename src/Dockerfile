@@ -12,5 +12,5 @@ RUN apt-get update -y
 
 RUN apt install -y libgl1-mesa-glx
 
-EXPOSE 8888
-CMD ["python", "app.py", "--host=0.0.0.0"]
+EXPOSE 8080
+CMD ["python", "app.py"]

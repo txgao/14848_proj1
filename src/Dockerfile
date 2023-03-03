@@ -10,5 +10,6 @@ RUN pip install -r requirements.txt
 
 RUN apt-get update -y 
 
-EXPOSE 7077
+
+EXPOSE 8080
 CMD ["python", "app.py"]

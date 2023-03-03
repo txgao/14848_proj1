@@ -18,4 +18,4 @@ def main():
 
 if __name__ == "__main__":
     print("Starting my application...")
-    app.run(host='0.0.0.0',port=7077)
+    app.run(host='0.0.0.0',port=8080)

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Choose File</title>
+  </head>
+  <style>
+    /* Center button */
+    .centerbutton {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 5vh;
+    }
+
+    /* Center header */
+    .centerheader {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 20vh;
+    }
+
+    /* Large button */
+    button {
+      font-size: 24px;
+      padding: 16px 32px;
+    }
+  </style>
+  <body>
+    
+    <div class="centerheader">
+      <h1>Welcome</h1>
+    </div>
+    <div class="centerheader">
+      <h2>Please choose files to upload</h2>
+    </div>  
+    <div class="centerbutton">
+      <form action="/" method="post" enctype="multipart/form-data">
+        <input type="file" name="files" id="files" multiple>
+        <br><br>
+        <button type="submit">Upload Files To GCP</button>
+      </form>
+    </div>
+    <div class="centerheader">
+      <h2>Uploaded Files</h2>
+    </div> 
+    <ul>
+      {% for filename in filenames %}
+      <li>{{ filename }}</li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>

@@ -1,9 +1,11 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-app-deployment
+  name: app-deployment
+  labels:
+    app: my-app
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: my-app
@@ -13,26 +15,27 @@ spec:
         app: my-app
     spec:
       containers:
-      - name: my-app-container
-        image: tx640/p1:v2
+      - name: appv3
+        image: tx640/p1:v3
         ports:
-        - containerPort: 8080
+        - containerPort: 8888
+        imagePullPolicy: Always
         env:
-        - name: KEY
-          value: value
-      imagePullSecrets:
-      - name: gcr-json-key
+        - name: FLASK_APP
+          value: "app.py"
+        - name: FLASK_ENV
+          value: "production"
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: my-app-service
+  name: my-app
 spec:
   selector:
     app: my-app
   ports:
   - name: http
-    protocol: TCP
-    port: 80
+    port: 8888
     targetPort: 8888
   type: LoadBalancer
+     

@@ -1,22 +1,32 @@
-apiVersion: apps/v1
 apiVersion: v1
 kind: Service
 metadata:
-  labels:
-    app: namenode
   name: namenode
+  labels:
+    microservice: namenode
 spec:
+  clusterIP: "None" 
   ports:
-    - port: 9870
-      name: gui
-      protocol: TCP
-      targetPort: 9870
-      nodePort: 30070
-    - port: 9000
-      name: internal
-      protocol: TCP
+    - name: "9000"
+      port: 9000
       targetPort: 9000
-      nodePort: 30001
   selector:
-    app: namenode
-  type: NodePort
+    microservice: namenode
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: namenode-ui
+  labels:
+    microservice: namenode-ui
+spec:
+  type: LoadBalancer
+  ports:
+    - name: "9870"
+      port: 9870
+      targetPort: 9870
+    - name: "9000"
+      port: 9000
+      targetPort: 9000
+  selector:
+    microservice: namenode

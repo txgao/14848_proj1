@@ -19,6 +19,6 @@ spec:
    spec:
      containers:
        - name: jupyter
-         image: tx640/jupyter:v1
+         image: jupyter/datascience-notebook:latest
          ports:
            - containerPort: 8888

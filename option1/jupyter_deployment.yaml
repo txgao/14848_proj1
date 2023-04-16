@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: jupyter-notebook
-          image: jupyter/datascience-notebook:latest
+          image: tx640/jupyter:v1
           env:
             - name: JUPYTER_TOKEN
               value: easytoken

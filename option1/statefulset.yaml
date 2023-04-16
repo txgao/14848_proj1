@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: datanode
+  labels:
+    microservice: datanode
+  name: datanode
+spec:
+  serviceName: datanode
+  replicas: 1
+  selector:
+    matchLabels:
+      microservice: datanode
+  template:
+    metadata:
+      labels:
+        microservice: datanode
+    spec:
+      containers:
+        - name: datanode
+          env:
+            - name: SERVICE_PRECONDITION
+              value: namenode.default.svc.cluster.local:9870
+          envFrom:
+            - configMapRef:
+                name: hadoop-datanode-env
+          image: bde2020/hadoop-datanode:2.0.0-hadoop3.2.1-java8
+          ports:
+            - containerPort: 9864
+      restartPolicy: Always

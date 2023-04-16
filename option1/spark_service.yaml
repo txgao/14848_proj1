@@ -1,16 +1,32 @@
-apiVersion: apps/v1
-apiVersion: v1
-kind: Service
+
+ apiVersion: apps/v1
+kind: Deployment
 metadata:
+  name: spark
   labels:
     app: spark
-  name: spark
 spec:
-  ports:
-    - port: 8080
-      protocol: TCP
-      targetPort: 8080
-      nodePort: 30080
   selector:
-    app: spark
-  type: NodePort
+    matchLabels:
+      app: spark
+  replicas: 1
+  minReadySeconds: 15
+  strategy:
+    type: RollingUpdate
+    rollingUpdate: 
+      maxUnavailable: 1
+      maxSurge: 1 
+  template:
+    metadata:
+      labels:
+        app: spark
+    spec:
+      containers:
+      - image: bitnami/spark
+        imagePullPolicy: Always
+        name: spark
+        env:
+          - name: SPARK_MODE
+            value: "master"
+        ports:
+          - containerPort: 8080

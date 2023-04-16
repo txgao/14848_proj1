@@ -16,4 +16,3 @@ spec:
   selector:
     io.kompose.service: namenode
   type: LoadBalancer
-  loadBalancerIP: 34.174.183.197

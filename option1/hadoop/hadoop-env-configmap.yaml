@@ -44,5 +44,5 @@ kind: ConfigMap
 metadata:
   creationTimestamp: null
   labels:
-    io.kompose.service: datanode1-hadoop-env
+    io.kompose.service: datanode-hadoop-env
   name: hadoop-env

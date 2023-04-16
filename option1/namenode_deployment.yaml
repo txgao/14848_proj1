@@ -19,7 +19,7 @@ spec:
    spec:
      containers:
        - name: namenode
-         image: tx640/namenode
+         image: tx640/namenode:v1
          ports:
            - containerPort: 9870
            - containerPort: 9000

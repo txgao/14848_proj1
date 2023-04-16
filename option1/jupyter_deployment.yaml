@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
- name: jupyter-notebook
+ name: jupyter
 spec:
  strategy:
    rollingUpdate:
@@ -11,14 +11,14 @@ spec:
  replicas: 1
  selector:
    matchLabels:
-     app: jupyter-notebook
+     app: jupyter
  template:
    metadata:
      labels:
-       app: jupyter-notebook
+       app: jupyter
    spec:
      containers:
-       - name: jupyter-notebook
+       - name: jupyter
          image: tx640/jupyter:v1
          ports:
            - containerPort: 8888

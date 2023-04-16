@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sonarscanner
+  labels:
+    app: sonarscanner
+spec:
+  selector:
+    matchLabels:
+      app: sonarscanner
+  replicas: 1
+  minReadySeconds: 15
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: sonarscanner
+    spec:
+      containers:
+        - image: tx640/sonarscanner:v1
+          imagePullPolicy: Always
+          name: sonarscanner
+          ports:
+            - containerPort: 9000

@@ -1,16 +1,27 @@
-apiVersion: apps/v1
 apiVersion: v1
 kind: Service
 metadata:
+  name: datanode
   labels:
-    app: datanode1
-  name: datanode1
+    microservice: datanode
 spec:
+  clusterIP: "None" 
   ports:
     - port: 9864
-      protocol: TCP
       targetPort: 9864
-      nodePort: 30064
   selector:
-    app: datanode1
-  type: NodePort
+    microservice: datanode
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: datanode-ui
+  labels:
+    microservice: datanode-ui
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 9864
+      targetPort: 9864
+  selector:
+    microservice: datanode

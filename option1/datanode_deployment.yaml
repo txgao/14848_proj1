@@ -19,6 +19,6 @@ spec:
    spec:
      containers:
        - name: datanode1
-         image: tx640/datanode
+         image: tx640/datanode:v1
          ports:
            - containerPort: 9864

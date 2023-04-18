@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Redirect Buttons</title>
+</head>
+<body>
+    <h1>Click a button to redirect:</h1>
+    <div>
+        <a href="{{ url_for('hadoop') }}"><button>Apache Hadoop</button></a>
+        <a href="{{ url_for('spark') }}"><button>Apache Spark</button></a>
+        <a href="{{ url_for('jupyter') }}"><button>Jupyter Notebook</button></a>
+        <a href="{{ url_for('sonar') }}"><button>SonarQube and SonarScanner</button></a>
+    </div>
+</body>
+</html>

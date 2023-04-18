@@ -3,15 +3,21 @@
 # Deploy all resources
 echo "Deploying workloads and services..."
 cd option1
+kubectl create -f hadoop/
 kubectl create -f spark/
 kubectl create -f jupyter/
-kubectl create -f hadoop/
 kubectl create -f sonar/
 
-# Wait for resources to be ready
-echo "Wait for resources to be created..."
-sleep 60   # pause for 60 seconds
-echo "...Finished!"
+# Wait for deployment to be ready
+echo "Waiting for deployment to be ready..."
+while [[ $(kubectl rollout status deployment/namenode) != *"successfully rolled out"* ]] || \
+      [[ $(kubectl rollout status deployment/spark) != *"successfully rolled out"* ]] || \
+      [[ $(kubectl rollout status deployment/jupyter-notebook-deployment) != *"successfully rolled out"* ]] || \
+      [[ $(kubectl rollout status deployment/sonarscanner) != *"successfully rolled out"* ]]; do
+    echo "Waiting for deployments to be ready..."
+    sleep 10
+done
+echo "Deployment all done!"
 
 # Retrieve all the service IP
 echo "Retrieving service IP..."

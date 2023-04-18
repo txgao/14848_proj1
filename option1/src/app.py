@@ -2,7 +2,7 @@ from flask import Flask, render_template, redirect
 import json
 
 def get_ip(filename):
-    return 'http://{}'.format(json.load(open('services/{}.json'.format(filename)))['status']['loadBalancer']['ingress'][0]['ip']
+    return json.load(open('services/{}.json'.format(filename)))['status']['loadBalancer']['ingress'][0]['ip']
 
 def get_port(filename):
     return json.load(open('services/{}.json'.format(filename)))['spec']['ports'][0]['port']

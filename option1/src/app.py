@@ -2,10 +2,10 @@ from flask import Flask, render_template, redirect
 import json
 
 def get_ip(filename):
-    return json.load(open('services/{}.json'.format(filename)))['status']['loadBalancer']['ingress']['ip']
+    return 'http://{}'.format(json.load(open('../services/{}.json'.format(filename)))['status']['loadBalancer']['ingress'][0]['ip'])
 
 SPARK_IP = get_ip('spark')
-HADOOP_IP = get_ip('spark')
+HADOOP_IP = get_ip('hadoop')
 JUPYTER_IP = get_ip('jupyter')
 SONAR_IP = get_ip('sonarscanner')
 

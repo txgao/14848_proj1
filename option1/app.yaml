@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: appv3
-        image: xinmanz/finalproject
+        image: ${DOCKER_USERNAME}/finalproject
         ports:
         - containerPort: 8888
         imagePullPolicy: Always

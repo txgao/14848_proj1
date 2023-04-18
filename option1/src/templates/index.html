@@ -3,13 +3,30 @@
 <head>
     <title>Redirect Buttons</title>
 </head>
+<style>
+    /* Center header */
+    .centerheader {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 20vh;
+    }
+
+    /* Large button */
+    button {
+      font-size: 24px;
+      padding: 16px 32px;
+    }
+  </style>
 <body>
-    <h1>Click a button to redirect:</h1>
+    <div class="centerheader">
+        <h1>Welcome To Big Data Processing Toolbox</h1>
+    </div>
     <div>
-        <a href="{{ url_for('hadoop') }}"><button>Apache Hadoop</button></a>
-        <a href="{{ url_for('spark') }}"><button>Apache Spark</button></a>
-        <a href="{{ url_for('jupyter') }}"><button>Jupyter Notebook</button></a>
-        <a href="{{ url_for('sonar') }}"><button>SonarQube and SonarScanner</button></a>
+        <a href="{{ url_for('hadoop') }}"><button type="button">Apache Hadoop</button></a>
+        <a href="{{ url_for('spark') }}"><button type="button">Apache Spark</button></a>
+        <a href="{{ url_for('jupyter') }}"><button type="button">Jupyter Notebook</button></a>
+        <a href="{{ url_for('sonar') }}"><button type="button">SonarQube and SonarScanner</button></a>
     </div>
 </body>
 </html>

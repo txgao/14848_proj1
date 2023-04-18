@@ -8,9 +8,9 @@ def get_port(filename):
     return json.load(open('services/{}.json'.format(filename)))['spec']['ports'][0]['port']
 
 spark_ip = 'http://{}:{}'.format(get_ip('spark'), get_port('spark'))
-hadoop_ip = 'http://{}:{}'.format(get_ip('spark'), get_port('hadoop'))
-jupyter_ip = 'http://{}:{}'.format(get_ip('spark'), get_port('jupyter'))
-sonar_ip = 'http://{}:{}'.format(get_ip('spark'), get_port('sonarscanner'))
+hadoop_ip = 'http://{}:{}'.format(get_ip('hadoop'), get_port('hadoop'))
+jupyter_ip = 'http://{}:{}'.format(get_ip('jupyter'), get_port('jupyter'))
+sonar_ip = 'http://{}:{}'.format(get_ip('sonarscanner'), get_port('sonarscanner'))
 
 PORT_NUM = 8888
 HOST = '0.0.0.0'

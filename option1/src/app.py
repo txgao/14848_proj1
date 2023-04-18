@@ -2,12 +2,12 @@ from flask import Flask, render_template, redirect
 import json
 
 def get_ip(filename):
-    return 'http://{}'.format(json.load(open('../services/{}.json'.format(filename)))['status']['loadBalancer']['ingress'][0]['ip'])
+    return 'http://{}'.format(json.load(open('services/{}.json'.format(filename)))['status']['loadBalancer']['ingress'][0]['ip'])
 
-SPARK_IP = get_ip('spark')
-HADOOP_IP = get_ip('hadoop')
-JUPYTER_IP = get_ip('jupyter')
-SONAR_IP = get_ip('sonarscanner')
+spark_ip = get_ip('spark')
+hadoop_ip = get_ip('hadoop')
+jupyter_ip = get_ip('jupyter')
+sonar_ip = get_ip('sonarscanner')
 
 PORT_NUM = 8888
 HOST = '0.0.0.0'
@@ -20,19 +20,19 @@ def index():
 
 @app.route('/hadoop')
 def hadoop():
-    return redirect(HADOOP_IP)
+    return redirect(hadoop_ip)
 
 @app.route('/spark')
 def spark():
-    return redirect(SPARK_IP)
+    return redirect(spark_ip)
 
 @app.route('/jupyter')
 def jupyter():
-    return redirect(JUPYTER_IP)
+    return redirect(jupyter_ip)
 
 @app.route('/sonar')
 def sonar():
-    return redirect(SONAR_IP)
+    return redirect(sonar_ip)
 
 if __name__ == "__main__":
     print("Starting my application...")

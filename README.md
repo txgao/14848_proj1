@@ -46,7 +46,7 @@ NOTE: You need to wait until the status shows OK before proceeding.
 
     ```chmod +x run.sh```
     
-- Deploy the application by running a shell script 
+- Deploy the application by running a shell script . This shell script will run teh deplotment yaml files of the four services and exctrat their ip-address. Then, it will automatically add these address to the app.py and re-build, deploy the app. 
 
     ```./run.sh```
 

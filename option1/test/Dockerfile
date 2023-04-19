@@ -1,11 +1,11 @@
 FROM sonarqube:7.1
-
+USER root
 # Install packages.  
 RUN apt-get update  
 RUN apt-get install -y vim wget
 
 # Install sonarqube scanner.  
-WORKDIR /usr/src 
+#WORKDIR /usr/src 
 
 RUN chown -R sonarqube $SONARQUBE_HOME
 # install sonarscanner

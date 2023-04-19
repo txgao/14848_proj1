@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 sonarqube:7.1
+FROM sonarqube:7.1
 COPY . /usr/src/myapp
 SHELL ["/bin/bash", "-c"]
 

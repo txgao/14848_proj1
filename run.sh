@@ -51,6 +51,7 @@ echo "Deploying Main App..."
 sed -i "s|DOCKER_USERNAME|${USERNAME}|g" app.yaml
 kubectl apply -f app.yaml
 
+# Wait for the application deployment to be done
 echo "Waiting for application to be ready..."
 while [[ $(kubectl rollout status deployment/app-deployment) != *"successfully rolled out"* ]]|| \
       [[ $(kubectl get services -o jsonpath='{.items[?(@.metadata.name=="my-app")].status.loadBalancer.ingress}') == "" ]]; do
@@ -58,5 +59,9 @@ while [[ $(kubectl rollout status deployment/app-deployment) != *"successfully r
     sleep 10
 done
 
+# Show the application URL
 DEPLOYMENT_URL=$(kubectl get services my-app -o jsonpath='{.status.loadBalancer.ingress[0].ip}:{.spec.ports[0].port}')
 echo "Application is now running at $DEPLOYMENT_URL"
+
+# Remove the services folder
+rm -rf src/services

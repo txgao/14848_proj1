@@ -3,13 +3,13 @@ version: '3.7'
 services:
     sonarqube:
         build: .
+        user: root
         container_name: sonarqube
         ports:
             - 9000:9000
         networks:
             - sonarnet
         environment:
-            - sonar.jdbc.url=jdbc:postgresql://db:5432/sonar
         volumes:
             - ./projects:/home/projects
             - sonarqube_conf:/opt/sonarqube/conf
@@ -17,17 +17,6 @@ services:
             - sonarqube_logs:/opt/sonarqube/logs
             - sonarqube_extensions:/opt/sonarqube/extensions
 
-    db:
-        image: postgres:latest
-        container_name: sonarqube_database
-        networks:
-            - sonarnet
-        environment:
-            - POSTGRES_USER=sonar
-            - POSTGRES_PASSWORD=sonar
-        volumes:
-            - postgresql:/var/lib/postgresql
-            - postgresql_data:/var/lib/postgresql/data
 
 networks:
     sonarnet:
@@ -39,6 +28,4 @@ volumes:
     sonarqube_data:
     sonarqube_logs:
     sonarqube_extensions:
-    postgresql:
-    postgresql_data:
     

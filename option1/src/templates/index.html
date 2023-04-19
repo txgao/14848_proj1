@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Redirect Buttons</title>
+    <title>Big Data Processing ToolBox</title>
 </head>
 <style>
     /* Center header */
@@ -16,13 +16,25 @@
     button {
       font-size: 24px;
       padding: 16px 32px;
+      color:darksalmon;
+    }
+
+    /* Center buttons horizontally */
+    .button-container {
+        display: flex;
+        justify-content: center;
+    }
+
+    /* Background color */
+    body {
+        background-color: lightsteelblue;
     }
   </style>
 <body>
     <div class="centerheader">
-        <h1>Welcome To Big Data Processing Toolbox</h1>
+        <h1>Welcome To Big Data Processing ToolBox</h1>
     </div>
-    <div>
+    <div class="button-container">
         <a href="{{ url_for('hadoop') }}"><button type="button">Apache Hadoop</button></a>
         <a href="{{ url_for('spark') }}"><button type="button">Apache Spark</button></a>
         <a href="{{ url_for('jupyter') }}"><button type="button">Jupyter Notebook</button></a>

@@ -9,7 +9,6 @@ services:
             - 9000:9000
         networks:
             - sonarnet
-        environment:
         volumes:
             - ./projects:/home/projects
             - sonarqube_conf:/opt/sonarqube/conf

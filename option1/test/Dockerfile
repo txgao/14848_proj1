@@ -4,7 +4,7 @@ FROM sonarqube:7.1
 USER root  
 RUN apt-get update  
 RUN apt-get install -y vim wget  
-RUN chown -R sonarqube:sonarqube /opt/sonarqube
+RUN chown -R sonarqube: /opt/sonarqube
 
 # Install sonarqube scanner.  
 WORKDIR /usr/src 

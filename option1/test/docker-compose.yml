@@ -1,30 +1,48 @@
-version: '3.7'
-
-services:
-    sonarqube:
-        build: .
-        user: root
-        container_name: sonarqube
-        ports:
-            - 9000:9000
-        networks:
-            - sonarnet
-        volumes:
-            - ./projects:/home/projects
-            - sonarqube_conf:/opt/sonarqube/conf
-            - sonarqube_data:/opt/sonarqube/data
-            - sonarqube_logs:/opt/sonarqube/logs
-            - sonarqube_extensions:/opt/sonarqube/extensions
-
-
-networks:
-    sonarnet:
-        driver: bridge
-
-volumes:
-    projects:
-    sonarqube_conf:
-    sonarqube_data:
-    sonarqube_logs:
-    sonarqube_extensions:
-    
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: sonarqube
+  name: sonarqube
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sonarqube
+  template:
+    metadata:
+      labels:
+        app: sonarqube
+    spec:
+      containers:
+        - name: sonarqube
+          image: wwweiweiii/sonarqube-scanner
+          resources:
+            requests:
+              cpu: 500m
+              memory: 1024Mi
+            limits:
+              cpu: 2000m
+              memory: 2048Mi
+          volumeMounts:
+          - mountPath: "/opt/sonarqube/data/"
+            name: sonar-data
+          - mountPath: "/opt/sonarqube/extensions/"
+            name: sonar-extensions
+          env:
+          - name: "SONARQUBE_JDBC_USERNAME"
+            value: "postgres"
+          - name: "SONARQUBE_JDBC_URL"
+            value: "jdbc:postgresql://postgres:5432/postgres"
+          - name: "SONARQUBE_JDBC_PASSWORD"
+            value: password
+          ports:
+          - containerPort: 9000
+            protocol: TCP
+      volumes:
+      - name: sonar-data
+        persistentVolumeClaim:
+          claimName: sonar-data
+      - name: sonar-extensions
+        persistentVolumeClaim:
+          claimName: sonar-extensions

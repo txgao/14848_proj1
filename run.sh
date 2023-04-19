@@ -17,6 +17,16 @@ while [[ $(kubectl rollout status deployment/namenode) != *"successfully rolled 
     echo "Waiting for deployments to be ready..."
     sleep 10
 done
+
+# Wait for services to be ready
+echo "Waiting for services to be ready..."
+while [[ $(kubectl get services -o jsonpath='{.items[?(@.metadata.name=="spark")].status.loadBalancer.ingress}') == "" ]] || \
+      [[ $(kubectl get services -o jsonpath='{.items[?(@.metadata.name=="namenode")].status.loadBalancer.ingress}') == "" ]] || \
+      [[ $(kubectl get services -o jsonpath='{.items[?(@.metadata.name=="sonarscanner")].status.loadBalancer.ingress}') == "" ]] || \
+      [[ $(kubectl get services -o jsonpath='{.items[?(@.metadata.name=="jupyter-service")].status.loadBalancer.ingress}') == "" ]]; do
+    echo "Waiting for services to be ready..."
+    sleep 10
+done
 echo "Deployment all done!"
 
 # Retrieve all the service IP
@@ -40,3 +50,13 @@ cd ..
 echo "Deploying Main App..."
 sed -i "s|DOCKER_USERNAME|${USERNAME}|g" app.yaml
 kubectl apply -f app.yaml
+
+echo "Waiting for application to be ready..."
+while [[ $(kubectl rollout status deployment/app-deployment) != *"successfully rolled out"* ]]|| \
+      [[ $(kubectl get services -o jsonpath='{.items[?(@.metadata.name=="my-app")].status.loadBalancer.ingress}') == "" ]]; do
+    echo "Waiting for application to be ready..."
+    sleep 10
+done
+
+DEPLOYMENT_URL=$(kubectl get services my-app -o jsonpath='{.status.loadBalancer.ingress[0].ip}:{.spec.ports[0].port}')
+echo "Application is now running at $DEPLOYMENT_URL"

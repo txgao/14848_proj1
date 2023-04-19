@@ -3,7 +3,11 @@ FROM sonarqube:7.1
 USER root  
 # Install packages.  
 RUN apt-get update  
-RUN apt-get install -y vim wget  
+RUN apt-get install -y vim wget
+
+RUN mkdir /home/.sonar
+RUN chmod 777 /home/.sonar
+ENV SONAR_USER_HOME=/home/.sonar
 
 # Install sonarqube scanner.  
 WORKDIR /usr/src 
@@ -15,9 +19,6 @@ RUN wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-s
 RUN ln -s /usr/lib/sonar-scanner/bin/sonar-scanner /usr/local/bin/sonar-scanner  
 ENV SONAR_RUNNER_HOME=/usr/lib/sonar-scanner  
 
-RUN mkdir /home/.sonar
-RUN chmod 777 /home/.sonar
-ENV SONAR_USER_HOME=/home/.sonar
 
 # Switch back to the sonarqube environment.  
 WORKDIR $SONARQUBE_HOME  

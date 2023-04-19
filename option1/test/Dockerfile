@@ -4,9 +4,7 @@ USER root
 RUN apt-get update  
 RUN apt-get install -y vim wget
 
-#RUN chown -R sonarqube:sonarqube /opt/sonarqube
 WORKDIR /usr/src
-RUN chown -R sonarqube:sonarqube /opt/sonarqube
 RUN wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-3.3.0.1492.zip && \
     unzip sonar-scanner-cli-3.3.0.1492.zip && mv sonar-scanner-3.3.0.1492/ /usr/lib/sonar-scanner
     
@@ -18,7 +16,6 @@ RUN mkdir /home/.sonar
 RUN chmod 777 /home/.sonar
 ENV SONAR_USER_HOME=/home/.sonar
  
-WORKDIR $SONARQUBE_HOME  
-RUN chown -R sonarqube:sonarqube /opt/sonarqube
+WORKDIR $SONARQUBE_HOME 
 USER sonarqube  
-RUN chown -R sonarqube:sonarqube /opt/sonarqube
+

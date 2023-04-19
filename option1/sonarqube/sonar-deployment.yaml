@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
@@ -6,6 +6,9 @@ metadata:
   name: sonarqube
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: sonarqube
   template:
     metadata:
       labels:
@@ -13,7 +16,7 @@ spec:
     spec:
       containers:
         - name: sonarqube
-          image: sonarqube:7.1
+          image: wwweiweiii/sonarqube-scanner
           resources:
             requests:
               cpu: 500m
@@ -28,14 +31,11 @@ spec:
             name: sonar-extensions
           env:
           - name: "SONARQUBE_JDBC_USERNAME"
-            value: "medium@medium"
+            value: "postgres"
           - name: "SONARQUBE_JDBC_URL"
-            value: "jdbc:postgresql://medium.postgres.database.azure.com/sonar"
+            value: "jdbc:postgresql://postgres:5432/postgres"
           - name: "SONARQUBE_JDBC_PASSWORD"
-            valueFrom:
-              secretKeyRef:
-                name: postgres
-                key: password
+            value: password
           ports:
           - containerPort: 9000
             protocol: TCP

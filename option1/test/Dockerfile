@@ -19,6 +19,8 @@ RUN mkdir /home/.sonar
 RUN chmod 777 /home/.sonar
 ENV SONAR_USER_HOME=/home/.sonar
 
+RUN chown -R sonarqube $SONARQUBE_HOME
+
 # Switch back to the sonarqube environment.  
 WORKDIR $SONARQUBE_HOME  
 USER sonarqube  

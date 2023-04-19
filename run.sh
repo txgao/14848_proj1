@@ -11,6 +11,7 @@ kubectl create -f sonar/
 # Wait for deployment to be ready
 echo "Waiting for deployment to be ready..."
 while [[ $(kubectl rollout status deployment/namenode) != *"successfully rolled out"* ]] || \
+      [[ $(kubectl rollout status deployment/datanode) != *"successfully rolled out"* ]] || \
       [[ $(kubectl rollout status deployment/spark) != *"successfully rolled out"* ]] || \
       [[ $(kubectl rollout status deployment/jupyter) != *"successfully rolled out"* ]] || \
       [[ $(kubectl rollout status deployment/sonarscanner) != *"successfully rolled out"* ]]; do

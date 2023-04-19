@@ -29,13 +29,6 @@ spec:
             name: sonar-data
           - mountPath: "/opt/sonarqube/extensions/"
             name: sonar-extensions
-          env:
-          - name: "SONARQUBE_JDBC_USERNAME"
-            value: "postgres"
-          - name: "SONARQUBE_JDBC_URL"
-            value: "jdbc:postgresql://postgres:5432/postgres"
-          - name: "SONARQUBE_JDBC_PASSWORD"
-            value: password
           ports:
           - containerPort: 9000
             protocol: TCP

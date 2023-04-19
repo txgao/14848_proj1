@@ -1,41 +1,28 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  name: sonarscanner
   labels:
-    app: sonarqube
-  name: sonarqube
+    app: sonarscanner
 spec:
-  replicas: 1
   selector:
     matchLabels:
-      app: sonarqube
+      app: sonarscanner
+  replicas: 1
+  minReadySeconds: 15
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
   template:
     metadata:
       labels:
-        app: sonarqube
+        app: sonarscanner
     spec:
       containers:
-        - name: sonarqube
-          image: wwweiweiii/sonarqube-scanner
-          resources:
-            requests:
-              cpu: 500m
-              memory: 1024Mi
-            limits:
-              cpu: 2000m
-              memory: 2048Mi
-          volumeMounts:
-          - mountPath: "/opt/sonarqube/data/"
-            name: sonar-data
-          - mountPath: "/opt/sonarqube/extensions/"
-            name: sonar-extensions
+        - image: tx640/sonar:testV
+          imagePullPolicy: Always
+          name: sonarscanner
           ports:
-          - containerPort: 9000
-            protocol: TCP
-      volumes:
-      - name: sonar-data
-        persistentVolumeClaim:
-          claimName: sonar-data
-      - name: sonar-extensions
-        persistentVolumeClaim:
-          claimName: sonar-extensions
+            - containerPort: 9000

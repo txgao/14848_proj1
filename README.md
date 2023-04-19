@@ -18,6 +18,8 @@ This method allows you to quickly and easily deploy the application on GCP by ru
 - The cluster should look like this.
 ![cluster](screenshots/cluster.jpg)
 
+NOTE: You need to wait until the status shows OK before proceeding.
+
 ## Step 2 - Clone Repo in Cloud Shell
 - Open Cloud Shell in GCP and clone the repo by doing
 

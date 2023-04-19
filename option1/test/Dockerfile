@@ -1,4 +1,6 @@
 FROM sonarqube:7.1
+
+USER root
 COPY . /usr/src/myapp
 SHELL ["/bin/bash", "-c"]
 

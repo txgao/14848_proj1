@@ -81,3 +81,7 @@ NOTE: You need to wait until the status shows OK before proceeding.
 
 - Click on SonarQube and SonarScanner
 ![sonar](screenshots/sonar.jpg)
+
+- Create project and run SonarScanner
+<img width="1251" alt="截屏2023-04-19 下午8 30 45" src="https://user-images.githubusercontent.com/56052188/233228416-de594dd7-930d-4e75-8594-c5ba0ef814b9.png">
+
